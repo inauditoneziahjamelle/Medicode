@@ -1,0 +1,594 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// VARIABLES
+
+
+string assignedPatientID = "000";
+
+int concern_summary[8];
+
+
+// FUNCTION DECLARATIONS
+
+void patientConsent();
+void patientInformation();
+void mainMenu();
+
+void generalQuestions();
+void healthcareFacility();
+
+void exitProgram();
+
+// FIRST FUNCTION 
+
+int main()
+{
+    string code;
+    int choice;
+
+    cout << "Input USSD: ";
+    cin >> code;
+
+    if (code == "*206#")
+    {
+        
+        cout << "\033[1;38;5;88m"; 
+        cout << "" << endl;
+    cout << R"(
+ _  _
+___
+__  _
+__
+_  __  ___ 
+|  \/  | ___|  _ \| _/ ___/ _ \|  _ \| ____|
+| |\/| |  _| | | | || | |  | | | | | | |  _|  
+| |  | | |___| |_| || | |__| |_| | |_| | |___ 
+|_|  |_|_____|____/|___\____\___/|____/|_____|
+    )" << endl;
+        cout << "\033[0m";
+
+        cout << "A USSD Code for Non-critical Medical Assistance." << endl;
+        cout << "MEDICODE USSD CODE: *206#" << endl << endl;
+
+        cout << "DISCLAIMER:" << endl;
+        cout << "\033MEDICODE asks questions about your symptoms and" << endl;
+        cout << "connects you to available General Practitioners (GPs)" << endl;
+        cout << "who can provide general health guidance." << endl << endl;
+
+        cout << "It caters only to Green Triage cases, which are" << endl;
+        cout << "generally non-emergency conditions that are bearable" << endl;
+        cout << "and can wait for routine medical assessment." << endl << endl;
+
+        cout << "A GP may refer you to a Specialized Practitioner" << endl;
+        cout << "if necessary." << endl << endl;
+
+        cout << "MEDICODE does not directly diagnose illnesses or" << endl;
+        cout << "provide Specialized Practitioner consultations.\033[0m" << endl;
+
+        cout << endl;
+        cout << "1. Proceed" << endl;
+        cout << "2. No" << endl;
+        cin >> choice;
+
+        if (choice == 1)
+        {
+            patientConsent();
+        }
+        else if (choice == 2)
+        {
+            cout << "END PROGRAM" << endl;
+            return 0;
+        }
+        else
+        {
+            cout << "Please choose either 1 or 2." << endl;
+        }
+    }
+    else
+    {
+        cout << "USSD Invalid. Please Try Again." << endl;
+    }
+
+    return 0;
+}
+
+// PATIENT CONSENT
+
+void patientConsent()
+{
+    int choice;
+
+    cout << endl;
+    cout << "PATIENT CONSENT" << endl;
+    cout << "Your personal and medical information will be" << endl;
+    cout << "collected to help provide healthcare navigation" << endl;
+    cout << "and connect you with a GP." << endl << endl;
+
+    cout << "1. Agree" << endl;
+    cout << "2. Disagree" << endl;
+    cin >> choice;
+
+    if (choice == 1)
+    {
+        patientInformation();
+    }
+    else if (choice == 2)
+    {
+        cout << "END PROGRAM" << endl;
+    }
+    else
+    {
+        cout << "Invalid choice. Please choose either 1 or 2." << endl;
+    }
+}
+
+// PATIENT INFORMATION
+
+void patientInformation()
+{
+    int choice;
+
+    cout << endl;
+    cout << "PATIENT'S INFORMATION" << endl;
+
+    cout << endl;
+    cout << "USER ID AND INFORMATION" << endl;
+
+    cout << "Patient ID: " << assignedPatientID << endl;
+
+    cout << endl;
+    cout << "1. Proceed" << endl;
+    cout << "2. Exit" << endl;
+    cin >> choice;
+
+    if (choice == 1)
+    {
+        mainMenu();
+    }
+    else
+    {
+        cout << "MEDICODE - Quick Care, For A More Convenient Healthcare!" << endl;
+        cout << "Thank you for using MEDICODE." << endl;
+    }
+}
+
+
+// MAIN MENU
+
+
+void mainMenu()
+{
+    int choice;
+
+    cout << endl;
+    cout << "========================================" << endl;
+    cout << "              MAIN MENU" << endl;
+    cout << "========================================" << endl;
+
+    cout << "1. REQUEST A DOCTOR" << endl;
+    cout << "2. PATIENT PROFILE" << endl;
+    cout << "3. EXIT" << endl;
+
+    cin >> choice;
+
+    switch (choice)
+    {
+        case 1:
+
+            generalQuestions();
+
+            break;
+
+        case 2:
+
+            break;
+
+        case 3:
+
+            exitProgram();
+
+            break;
+
+        default:
+
+            cout << "Please choose a valid option." << endl;
+
+            mainMenu();
+    }
+}
+
+// GENERAL QUESTIONS
+
+void generalQuestions()
+{
+    cout << endl;
+    cout << "How long have you experienced this problem?" << endl;
+    cout << "1. Today - Started today" << endl;
+    cout << "2. A Few Days - Lasted 1-3 days." << endl;
+    cout << "3. One Week or Longer - Lasted at least 7 days." << endl;
+    cout << "4. Not Sure" << endl;
+
+    cin >> concern_summary[0];
+
+
+    cout << endl;
+    cout << "How severe is your concern" << endl;
+    cout << "1. Mild - Does not greatly affect daily activities." << endl;
+    cout << "2. Moderate - Makes some daily activities difficult." << endl;
+    cout << "3. Severe - Makes normal daily activities very difficult." << endl;
+
+    cin >> concern_summary[1];
+
+
+    cout << endl;
+    cout << "How does this concern affect activities?" << endl;
+    cout << "1. Not at All - Daily activities are mostly unaffected." << endl;
+    cout << "2. Slightly - Some activities are affected." << endl;
+    cout << "3. Moderately - Several activities are difficult." << endl;
+    cout << "4. Not Sure" << endl;
+
+    cin >> concern_summary[2];
+
+
+    cout << endl;
+    cout << "Is your condition getting worse?" << endl;
+    cout << "1. Yes - Becoming more severe." << endl;
+    cout << "2. No - Staying the same." << endl;
+    cout << "3. Improving - Getting better." << endl;
+    cout << "4. Not Sure" << endl;
+
+    cin >> concern_summary[3];
+
+
+    cout << endl;
+    cout << "Do you have other symptoms or concerns?" << endl;
+    cout << "1. Yes" << endl;
+    cout << "2. No" << endl;
+    cout << "3. Back to Previous Question" << endl;
+    cout << "4. Back to Main Menu" << endl;
+
+    cin >> concern_summary[4];
+
+
+    cout << endl;
+    cout << "Are you experiencing any urgent warning signs?" << endl;
+    cout << "1. Difficulty breathing" << endl;
+    cout << "2. Chest pain or pressure" << endl;
+    cout << "3. Fainting or sudden confusion" << endl;
+    cout << "4. Severe allergic reaction" << endl;
+    cout << "5. Feeling unsafe or needing immediate mental health support" << endl;
+    cout << "6. None of These" << endl;
+    cout << "7. Back to Previous Question" << endl;
+
+    cin >> concern_summary[5];
+
+
+    cout << endl;
+    cout << "Have you taken any medication or received any treatment for this concern?" << endl;
+    cout << "1. Yes" << endl;
+    cout << "2. No" << endl;
+    cout << "3. Not Applicable" << endl;
+    cout << "4. Back to Previous Question" << endl;
+    cout << "5. Back to Main Menu" << endl;
+
+    cin >> concern_summary[6];
+
+
+    cout << endl;
+    cout << "1. View Concern Summary" << endl;
+    cout << "2. Connect to an Available General Practitioner" << endl;
+    cout << "3. View General Health Guidance" << endl;
+    cout << "4. Back to Main Menu" << endl;
+    cout << "5. Exit" << endl;
+
+    cin >> concern_summary[7];
+
+
+    if (concern_summary[7] == 1)
+    {
+        cout << endl;
+        cout << "===============================" << endl;
+        cout << "        SYMPTOM SUMMARY" << endl;
+        cout << "===============================" << endl;
+
+        string durations[] =
+        {
+            "",
+            "Today",
+            "A Few Days",
+            "One Week or Longer",
+            "Not Sure"
+        };
+
+        string severities[] =
+        {
+            "",
+            "Mild",
+            "Moderate",
+            "Severe"
+        };
+
+        string impacts[] =
+        {
+            "",
+            "Not at All",
+            "Slightly",
+            "Moderately",
+            "Not Sure"
+        };
+
+        string progressions[] =
+        {
+            "",
+            "Yes - Becoming more severe",
+            "No - Staying the same",
+            "Improving - Getting better",
+            "Not Sure"
+        };
+
+        string symptoms[] =
+        {
+            "",
+            "Yes",
+            "No",
+            "Back to Previous Question",
+            "Back to Main Menu"
+        };
+
+        string warningSigns[] =
+        {
+            "",
+            "Difficulty breathing",
+            "Chest pain or pressure",
+            "Fainting or sudden confusion",
+            "Severe allergic reaction",
+            "Feeling unsafe or needing immediate mental health support",
+            "None of These",
+            "Back to Previous Question"
+        };
+
+        string medications[] =
+        {
+            "",
+            "Yes",
+            "No",
+            "Not Applicable",
+            "Back to Previous Question",
+            "Back to Main Menu"
+        };
+
+        cout << "Duration: "
+             << (concern_summary[0] >= 1 &&
+                 concern_summary[0] <= 4
+                 ? durations[concern_summary[0]]
+                 : "Invalid")
+             << endl;
+
+        cout << "Severity: "
+             << (concern_summary[1] >= 1 &&
+                 concern_summary[1] <= 3
+                 ? severities[concern_summary[1]]
+                 : "Invalid")
+             << endl;
+
+        cout << "Impact on Activities: "
+             << (concern_summary[2] >= 1 &&
+                 concern_summary[2] <= 4
+                 ? impacts[concern_summary[2]]
+                 : "Invalid")
+             << endl;
+
+        cout << "Progression: "
+             << (concern_summary[3] >= 1 &&
+                 concern_summary[3] <= 4
+                 ? progressions[concern_summary[3]]
+                 : "Invalid")
+             << endl;
+
+        cout << "Other Symptoms: "
+             << (concern_summary[4] >= 1 &&
+                 concern_summary[4] <= 4
+                 ? symptoms[concern_summary[4]]
+                 : "Invalid")
+             << endl;
+
+        cout << "Urgent Signs: "
+             << (concern_summary[5] >= 1 &&
+                 concern_summary[5] <= 7
+                 ? warningSigns[concern_summary[5]]
+                 : "Invalid")
+             << endl;
+
+        cout << "Medication/Treatment: "
+             << (concern_summary[6] >= 1 &&
+                 concern_summary[6] <= 5
+                 ? medications[concern_summary[6]]
+                 : "Invalid")
+             << endl;
+
+        cout << "===============================" << endl;
+    }
+
+
+    else if (concern_summary[7] == 2)
+    {
+        healthcareFacility();
+    }
+
+
+    else if (concern_summary[7] == 4)
+    {
+        mainMenu();
+    }
+
+
+    else if (concern_summary[7] == 5)
+    {
+        exitProgram();
+    }
+}
+
+
+// HEALTHCARE FACILITY
+
+void healthcareFacility()
+{
+    int facilityChoice;
+    int doctorChoice;
+    string number;
+
+    cout << endl;
+    cout << "=================================" << endl;
+    cout << "   CHOOSE A HEALTHCARE FACILITY" << endl;
+    cout << "=================================" << endl;
+
+    cout << "1. Public Hospital" << endl;
+    cout << "2. Private Hospital" << endl;
+    cout << "3. Back to Main Menu" << endl;
+    cout << "4. Exit" << endl;
+
+    cout << "Enter your choice: ";
+    cin >> facilityChoice;
+
+
+    // PUBLIC 
+
+    if (facilityChoice == 1)
+    {
+        cout << endl;
+        cout << "AVAILABLE PUBLIC DOCTORS" << endl;
+
+        cout << "1. Example Doctor A" << endl;
+        cout << "2. Example Doctor B" << endl;
+        cout << "3. Example Doctor C" << endl;
+
+        cout << "Select Doctor: ";
+        cin >> doctorChoice;
+
+        switch (doctorChoice)
+        {
+            case 1:
+
+                number = "09170000001";
+
+                break;
+
+            case 2:
+
+                number = "09170000002";
+
+                break;
+
+            case 3:
+
+                number = "09170000003";
+
+                break;
+
+            default:
+
+                cout << "Invalid doctor selection!" << endl;
+
+                return;
+        }
+    }
+
+
+    // PRIVATE 
+
+    else if (facilityChoice == 2)
+    {
+        cout << endl;
+        cout << "AVAILABLE PRIVATE DOCTORS" << endl;
+
+        cout << "1. Example Doctor D" << endl;
+        cout << "2. Example Doctor E" << endl;
+        cout << "3. Example Doctor F" << endl;
+
+        cout << "Select Doctor: ";
+        cin >> doctorChoice;
+
+        switch (doctorChoice)
+        {
+            case 1:
+
+                number = "09170000004";
+
+                break;
+
+            case 2:
+
+                number = "09170000005";
+
+                break;
+
+            case 3:
+
+                number = "09170000006";
+
+                break;
+
+            default:
+
+                cout << "Invalid doctor selection!" << endl;
+
+                return;
+        }
+    }
+
+
+    // BACK TO MAIN MENU
+
+    else if (facilityChoice == 3)
+    {
+        cout << endl;
+        cout << "Returning to Main Menu..." << endl;
+
+        mainMenu();
+
+        return;
+    }
+
+
+    // EXIT
+
+    else if (facilityChoice == 4)
+    {
+        exitProgram();
+
+        return;
+    }
+
+
+    // INVALID FACILITY
+
+    else
+    {
+        cout << "Invalid selection!" << endl;
+
+        return;
+    }
+
+
+    // SELECTED DOCTOR
+
+    cout << endl;
+    cout << "Selected Doctor!" << endl;
+    cout << "Doctor's Contact Number: " << number << endl;
+
+    cout << "Dialing the Doctor" << endl;
+}
+
+
+
+// EXIT PROGRAM
+
+void exitProgram()
+{
+    cout << endl;
+    cout << "MEDICODE - Quick Care, For A More Convenient Healthcare!" << endl;
+    cout << "Thank you for using MEDICODE." << endl;
+}
