@@ -3,8 +3,10 @@
 #include <string>
 using namespace std;
 
+void healthcareFacility();
 int main() {
 
+     
     int facilityChoice;
     int doctorChoice;
     string number;
@@ -127,4 +129,9 @@ int main() {
     cout << "\nPhone dialer opened!" << endl;
 
     return 0;
+}
+}
+
+void healthcareFacility()
+{
 }
